@@ -22,7 +22,7 @@ frequencies = nltk.FreqDist(itertools.chain(*tokenized))
 vocabulary = frequencies.most_common(VOCAB_SIZE-1)
 index_to_word = [word[0] for word in vocabulary]
 index_to_word.append(UNKNOWN)
-word_to_index = dict([(word, index) for word, index in enumerate(index_to_word)])
+word_to_index = dict([(word, index) for index, word in enumerate(index_to_word)])
 
 for i, sent in enumerate(tokenized):
     tokenized[i] = [word if word in word_to_index else UNKNOWN for word in sent]
