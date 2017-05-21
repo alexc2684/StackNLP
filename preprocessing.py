@@ -29,3 +29,6 @@ for i, sent in enumerate(tokenized):
 
 X_train = np.asarray([[word_to_index[w] for w in sent[:-1]] for sent in tokenized])
 y_train = np.asarray([[word_to_index[w] for w in sent[1:]] for sent in tokenized])
+
+np.save("X_train.npy", X_train)
+np.save("y_train.npy", y_train)
