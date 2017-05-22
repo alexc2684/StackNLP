@@ -3,6 +3,7 @@ import nltk
 import theano
 import csv
 import itertools
+import pickle
 
 VOCAB_SIZE = 10000
 UNKNOWN = "UNKNOWN_TOKEN"
@@ -22,6 +23,7 @@ frequencies = nltk.FreqDist(itertools.chain(*tokenized))
 vocabulary = frequencies.most_common(VOCAB_SIZE-1)
 index_to_word = [word[0] for word in vocabulary]
 index_to_word.append(UNKNOWN)
+
 word_to_index = dict([(word, index) for index, word in enumerate(index_to_word)])
 
 for i, sent in enumerate(tokenized):
@@ -32,3 +34,9 @@ y_train = np.asarray([[word_to_index[w] for w in sent[1:]] for sent in tokenized
 
 np.save("X_train.npy", X_train)
 np.save("y_train.npy", y_train)
+
+with open("wti.pickle", "wb") as f:
+    pickle.dump(word_to_index, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open("itw.pickle", "wb") as f:
+    pickle.dump(index_to_word, f, protocol=pickle.HIGHEST_PROTOCOL)
