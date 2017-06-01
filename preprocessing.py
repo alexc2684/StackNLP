@@ -35,6 +35,11 @@ y_train = np.asarray([[word_to_index[w] for w in sent[1:]] for sent in tokenized
 np.save("X_train.npy", X_train)
 np.save("y_train.npy", y_train)
 
+data = [x[0] for x in vocabulary]
+
+with open("data.pickle", "wb") as f:
+    pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+
 with open("wti.pickle", "wb") as f:
     pickle.dump(word_to_index, f, protocol=pickle.HIGHEST_PROTOCOL)
 
